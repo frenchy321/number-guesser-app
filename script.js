@@ -19,14 +19,23 @@ maxNum.textContent = max;
 // LISTEN FOR GUESS
 guessBtn.addEventListener("click", function() {
   let guess = parseInt(guessInput.value);
-  console.log(guess);
-  //   VALIDATE
-  if (guess === NaN || guess < min || guess > max) {
-    setMessage(`Please Enter A Number Between ${min} and ${max}`);
+
+  //  VALIDATE
+  if (isNaN(guess) || guess < min || guess > max) {
+    setMessage(`Please Enter A Number Between ${min} and ${max}`, "red");
+  }
+
+  if (guess === winningNum) {
+    guessInput.disabled = true;
+    guessInput.style.borderColor = "green";
+
+    setMessage(`${winningNum} is correct, YOU WIN!`, "green");
+  } else {
   }
 });
 
 // SET MESSAGE
-function setMessage(msg) {
+function setMessage(msg, color) {
+  message.style.color = color;
   message.textContent = msg;
 }
