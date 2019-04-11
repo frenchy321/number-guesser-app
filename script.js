@@ -26,13 +26,38 @@ guessBtn.addEventListener("click", function() {
   }
 
   if (guess === winningNum) {
-    guessInput.disabled = true;
-    guessInput.style.borderColor = "green";
-
-    setMessage(`${winningNum} is correct, YOU WIN!`, "green");
+    // guessInput.disabled = true;
+    // guessInput.style.borderColor = "green";
+    // setMessage(`${winningNum} is correct, YOU WIN!`, "green");
   } else {
+    // WRONG NUMBER
+    guessesLeft -= 1;
+
+    if (guessesLeft === 0) {
+      guessInput.disabled = true;
+      guessInput.style.borderColor = "red";
+
+      setMessage(
+        `Game Over, You Lost. The Correct Number Was ${winningNum}`,
+        "red"
+      );
+    } else {
+      guessInput.style.bordercolor = "red";
+
+      guessInput.value = "";
+      // GAME CONTINUES ANSWER WRONG
+      setMessage(`${guess} Is Not Correct, ${guessesLeft} Guesses Left`, "red");
+    }
   }
 });
+
+// GAME OVER
+function gameOver(won, msg) {
+  guessInput.disabled = true;
+  guessInput.style.borderColor = "green";
+
+  setMessage(`${winningNum} is correct, YOU WIN!`, "green");
+}
 
 // SET MESSAGE
 function setMessage(msg, color) {
